@@ -1,0 +1,8 @@
+// Timing service is needed
+service = Timing { }
+
+module myTimer = Timer{
+
+	// whether to include timing info about Timer itself
+	untracked bool includeSelf = false		
+}

@@ -1,4 +1,7 @@
-// Timing service is needed
+// subroutine-by-subroutine timing info (optional)
+service = SimpleProfiling {}
+
+// Timing service is mandatory
 service = Timing { }
 
 module myTimer = Timer{
@@ -6,3 +9,4 @@ module myTimer = Timer{
 	// whether to include timing info about Timer itself
 	untracked bool includeSelf = false		
 }
+

@@ -1,11 +1,14 @@
 // subroutine-by-subroutine timing info (optional)
-service = SimpleProfiling {}
+// service = SimpleProfiling {}
 
-// Timing service is mandatory
+// Use CPUTimerService if you want to do cpu-time measurements;
+// Comment out if you want to do wall-clock-time measurements
+service = CPUTimerService {}
+
+// This is mandatory!
 service = Timing { }
 
 module myTimer = Timer{
-
 	// whether to include timing info about Timer itself
 	untracked bool includeSelf = false		
 }

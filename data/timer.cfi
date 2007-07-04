@@ -1,10 +1,9 @@
-// subroutine-by-subroutine timing info (optional)
-// service = SimpleProfiling {}
+// Make sure to enable the "TimerService" service at your top-level cfg!
+// by including something like the following:
+// service = TimerService {
+//  untracked bool useCPUtime = true // set to false for wall-clock-time
+// }
 
-// Use TimerService if you want to do cpu-/wall-clock-time measurements;
-service = TimerService {
-  untracked bool useCPUtime = true // set to false for wall-clock-time	
-}
 
 // This is the module that stores in the Event the timing info
 module myTimer = Timer{

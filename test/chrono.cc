@@ -29,8 +29,6 @@
 #include "mach_clock_get_time.h"
 #include "mach_absolute_time.h"
 #include "x86_tsc_clock.h"
-#include "boost_timer.h"
-#include "tbb_tick_count.h"
 #include "omp_get_wtime.h"
 
 #include "benchmark.h"
@@ -39,7 +37,7 @@
 void init_timers(std::vector<BenchmarkBase *> & timers) 
 {
   // std::chrono timers
-  timers.push_back(new Benchmark<std::chrono::steady_clock>("std::chrono::steady_clock"));
+  timers.push_back(new Benchmark<std::chrono::monotonic_clock>("std::chrono::monotonic_clock"));
   timers.push_back(new Benchmark<std::chrono::system_clock>("std::chrono::system_clock"));
   timers.push_back(new Benchmark<std::chrono::high_resolution_clock>("std::chrono::high_resolution_clock"));
 
@@ -136,13 +134,6 @@ void init_timers(std::vector<BenchmarkBase *> & timers)
     timers.push_back(new Benchmark<clock_rdtscp_native>("RDTSCP (" + tsc_freq + ") (native)"));
 
 #endif // defined __x86_64__ or defined __i386__
-
-  // boost timer clock
-  timers.push_back(new Benchmark<clock_boost_timer_realtime>("boost::timer (wall-clock time)"));
-  timers.push_back(new Benchmark<clock_boost_timer_cputime>("boost::timer (cpu time)"));
-
-  // TBB tick_count (this interface does not expose the underlying type, so it cannot easily be used to build a "native" clock interface)
-  timers.push_back(new Benchmark<clock_tbb_tick_count>("tbb::tick_count"));
 
   // OpenMP timer
   timers.push_back(new Benchmark<clock_omp_get_wtime>("omp_get_wtime"));
